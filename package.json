@@ -1,7 +1,6 @@
 {
   "name": "electron-with-typescript",
   "version": "1.0.0",
-  "description": "",
   "main": "output/browser/index.js",
   "scripts": {
     "transpile": "tsc",
@@ -21,5 +20,14 @@
   },
   "dependencies": {
     "firebase": "^10.7.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sungnohwnag/electron-with-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sungnohwnag/electron-with-typescript/issues"
+  },
+  "homepage": "https://github.com/sungnohwnag/electron-with-typescript#readme",
+  "description": ""
 }
