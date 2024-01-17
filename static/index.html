@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Electron with Typescript</title>
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../node_modules/bulma/css/bulma.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <h2>Hello World</h2>
+    <section class="section">
+        <h1 class="title">Section</h1>
+        <h2 class="subtitle">
+          A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+        </h2>
+      </section>
+      <div class="buttons">
+        <button class="button is-primary">Primary</button>
+        <button class="button is-link">Link</button>
+      </div>
+      
+      <div class="buttons">
+        <button class="button is-info">Info</button>
+        <button class="button is-success">Success</button>
+        <button class="button is-warning">Warning</button>
+        <button class="button is-danger">Danger</button>
+      </div>
     <script>
         require('../output/renderer/index.js');
     </script>
