@@ -10,23 +10,123 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <section class="section">
-        <h1 class="title">Section</h1>
-        <h2 class="subtitle">
-          A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
-        </h2>
-      </section>
-      <div class="buttons">
-        <button class="button is-primary">Primary</button>
-        <button class="button is-link">Link</button>
+  <section class="hero is-primary is-medium" id="nav-section">
+    <div class="hero-head">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              Electron With Typescript Hands-On Labs
+            </a>
+            <span class="navbar-burger" data-target="navbarMenuHeroA">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item is-active">
+                #Generla
+              </a>
+              <span class="navbar-item" id="btn-logout">
+                <a class="button is-primary is-inverted">
+                  <span class="icon">
+                    <i class="fa fa-sign-out"></i>
+                  </span>
+                  <span>Logout</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </section>
+  <section class="section" id="login-section"><div class="field">
+    <p class="control has-icons-left has-icons-right">
+      <input class="input" type="email" placeholder="Email" id="email">
+      <span class="icon is-small is-left">
+        <i class="fa fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fa fa-check"></i>
+      </span>
+    </p>
+  </div>
+  <div class="field">
+    <p class="control has-icons-left">
+      <input class="input" type="password" placeholder="Password" id="password">
+      <span class="icon is-small is-left">
+        <i class="fa fa-lock"></i>
+      </span>
+    </p>
+  </div>
+  <div class="field">
+    <p class="control">
+      <button class="button is-success" id="btn-login">
+        Login
+      </button>
+    </p>
+  </div>
+  </section>
+  <section class="section hero is-primary" id="chat-section">
+    <div class="box">
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+              <br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+            </p>
+          </div>         
+        </div>
+      </article>
+    </div>
+    <div class="box">
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+              <br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+            </p>
+          </div>         
+        </div>
+      </article>
+    </div>
+    <div class="box">
+      <article class="media">
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+              <br>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+            </p>
+          </div>         
+        </div>
+      </article>
+    </div>
+  </section>
+  <section class="section" id="write-section">
+    <div class="container">
+      <div class="field">
+        <div class="control">
+          <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
+        </div>
       </div>
-      
-      <div class="buttons">
-        <button class="button is-info">Info</button>
-        <button class="button is-success">Success</button>
-        <button class="button is-warning">Warning</button>
-        <button class="button is-danger">Danger</button>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary">
+            Send message
+          </button>
+        </div>
       </div>
+    </div>
+  </section>
     <script>
         require('../output/renderer/index.js');
     </script>

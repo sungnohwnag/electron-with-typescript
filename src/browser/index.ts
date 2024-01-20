@@ -1,6 +1,7 @@
-import {app, BrowserWindow} from 'electron'; 
+import {app, BrowserWindow, ipcMain} from 'electron'; 
 import {initializeApp} from 'firebase/app';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+import {getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import {LoginObj} from '../common/type';
 import * as url from 'url';
 import * as path from 'path';
 
@@ -27,6 +28,14 @@ app.on('ready',()=>{
     console.log("ready"); 
 
     const win = new BrowserWindow({
+      width:500,
+      minWidth:500,
+      maxWidth:1500,
+      height:700,
+      minHeight:700,
+      maxHeight:700,
+      maximizable:false,
+      center:true,
       //renderer에서 require를 쓰기위한 옵션
       webPreferences: {
         nodeIntegration: true,
@@ -34,5 +43,34 @@ app.on('ready',()=>{
       }  
     });
     win.loadURL(html);
+
+    ipcMain.on('request-login',async (event,arg:LoginObj)=>{
+      console.log(arg);
+      let user = null;
+
+      try{
+        user = await signInWithEmailAndPassword(auth,arg.email,arg.password);
+      } catch(error){
+        console.log(error);
+      }
+
+      if(user){
+        event.sender.send('login-success');
+      }
+      else{
+        event.sender.send('login-fail');
+      }
+    })
+
+    ipcMain.on('request-logout',async(event)=>{
+      let user = null;
+      try{
+      user = await signOut(auth);
+      }catch(error){
+        console.log(error);
+      }
+      
+      event.sender.send('logout-success');
+    });
     // signInWithEmailAndPassword(auth,"sungnohwang@gmail.com","dhkdsh84!A");
 })
