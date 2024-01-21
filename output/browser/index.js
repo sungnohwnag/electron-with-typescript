@@ -10,24 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const electron_1 = require("electron");
-const app_1 = require("firebase/app");
-const auth_1 = require("firebase/auth");
+const firebase = require("firebase");
 const url = require("url");
 const path = require("path");
 const html = url.format({
     protocol: 'file',
     pathname: path.join(__dirname, '../../static/index.html')
 });
-const firebaseApp = (0, app_1.initializeApp)({
+firebase.default.initializeApp({
     apiKey: "AIzaSyD9GNQMO5b91eG6Ce9RYdiHcaJwR-dVfbc",
     databaseURL: "https://electron-with-typescript-518be-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "electron-with-typescript-518be",
     appId: "1:581486817534:web:8d5f0556179606d2e3b5af",
     measurementId: "G-CJP7NGJVLC"
 });
-const auth = (0, auth_1.getAuth)(firebaseApp);
+const auth = firebase.default.auth();
+const database = firebase.default.database();
 auth.onAuthStateChanged((user) => {
-    console.log(user);
+    // console.log(user);
 });
 electron_1.app.on('ready', () => {
     console.log("ready");
@@ -51,22 +51,29 @@ electron_1.app.on('ready', () => {
         console.log(arg);
         let user = null;
         try {
-            user = yield (0, auth_1.signInWithEmailAndPassword)(auth, arg.email, arg.password);
+            user = yield auth.signInWithEmailAndPassword(arg.email, arg.password);
         }
         catch (error) {
             console.log(error);
         }
         if (user) {
+            console.log('if');
             event.sender.send('login-success');
+            const ref = database.ref();
+            ref.on('value', (snapshot) => {
+                console.log('ref on');
+                console.log(snapshot);
+            });
         }
         else {
+            console.log('else');
             event.sender.send('login-fail');
         }
     }));
     electron_1.ipcMain.on('request-logout', (event) => __awaiter(void 0, void 0, void 0, function* () {
         let user = null;
         try {
-            user = yield (0, auth_1.signOut)(auth);
+            user = yield auth.signOut();
         }
         catch (error) {
             console.log(error);

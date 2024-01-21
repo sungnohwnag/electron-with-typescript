@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "bulma": "^0.9.4",
-    "firebase": "^10.7.1",
+    "firebase": "^8.0.0",
     "font-awesome": "^4.7.0"
   },
   "repository": {

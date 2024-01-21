@@ -1,6 +1,5 @@
 import {app, BrowserWindow, ipcMain} from 'electron'; 
-import {initializeApp} from 'firebase/app';
-import {getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import * as firebase from 'firebase';
 import {LoginObj} from '../common/type';
 import * as url from 'url';
 import * as path from 'path';
@@ -10,18 +9,19 @@ const html = url.format({
   pathname: path.join(__dirname,'../../static/index.html')
 });
 
-const firebaseApp = initializeApp ({
+    firebase.default.initializeApp ({
     apiKey: "AIzaSyD9GNQMO5b91eG6Ce9RYdiHcaJwR-dVfbc",
     databaseURL: "https://electron-with-typescript-518be-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "electron-with-typescript-518be",
     appId: "1:581486817534:web:8d5f0556179606d2e3b5af",
     measurementId: "G-CJP7NGJVLC"
   });
- 
-const auth = getAuth(firebaseApp);
+  
+const auth = firebase.default.auth(); 
+const database = firebase.default.database();
 
 auth.onAuthStateChanged((user:{ email:string;})=>{
-  console.log(user);
+  // console.log(user);
 });
 
 app.on('ready',()=>{
@@ -49,15 +49,23 @@ app.on('ready',()=>{
       let user = null;
 
       try{
-        user = await signInWithEmailAndPassword(auth,arg.email,arg.password);
+        user = await auth.signInWithEmailAndPassword(arg.email,arg.password);
       } catch(error){
         console.log(error);
       }
-
-      if(user){
+      
+      if(user){        
+        console.log('if');
         event.sender.send('login-success');
+        const ref=  database.ref();
+        ref.on('value',(snapshot)=>{
+          console.log('ref on');
+          console.log(snapshot);
+        });
       }
       else{
+        
+        console.log('else');
         event.sender.send('login-fail');
       }
     })
@@ -65,7 +73,7 @@ app.on('ready',()=>{
     ipcMain.on('request-logout',async(event)=>{
       let user = null;
       try{
-      user = await signOut(auth);
+      user = await auth.signOut();
       }catch(error){
         console.log(error);
       }
